@@ -1,0 +1,16 @@
+{
+  "name": "stylus-lang-bundle",
+  "description": "Browser friendly version of Stylus Language",
+  "version": "0.54.5",
+  "author": "TJ Holowaychuk <tj@vision-media.ca>",
+  "homepage": "http://stylus-lang.com/",
+  "keywords": [
+    "css",
+    "parser",
+    "style",
+    "stylesheets",
+    "jade",
+    "language"
+  ],
+  "main": "stylus.min.js"
+}
