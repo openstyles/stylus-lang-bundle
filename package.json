@@ -24,6 +24,10 @@
     "rollup-plugin-inline-js": "^0.3.0",
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-re": "^1.0.7",
-    "rollup-plugin-terser": "^2.0.2"
+    "rollup-plugin-terser": "^2.0.2",
+    "shx": "^0.3.2"
+  },
+  "scripts": {
+    "build": "shx rm -rf dist && rollup -c"
   }
 }
