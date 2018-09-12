@@ -16,7 +16,7 @@
   "dependencies": {
     "event-lite": "^0.1.1",
     "path-browserify": "^1.0.0",
-    "stylus": "github:stylus/stylus#dev",
+    "stylus": "github:openstyles/stylus-lang#stylus-extension",
     "tiny-sha1": "^0.2.1"
   },
   "devDependencies": {
