@@ -56,6 +56,11 @@ export default {
           match: /(utils|renderer)\.js$/,
           test: /__dirname/,
           replace: '"/"'
+        },
+        {
+          match: /\bs\.js$/,
+          test: /self\.options/g,
+          replace: "self && self.options"
         }
       ]
     }),
