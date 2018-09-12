@@ -14,7 +14,10 @@
   ],
   "main": "stylus.min.js",
   "dependencies": {
-    "stylus": "github:stylus/stylus#dev"
+    "event-lite": "^0.1.1",
+    "path-browserify": "^1.0.0",
+    "stylus": "github:stylus/stylus#dev",
+    "tiny-sha1": "^0.2.1"
   },
   "devDependencies": {
     "rollup": "^0.65.2",
