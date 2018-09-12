@@ -65,6 +65,7 @@ export default {
     re({
       patterns: [
         {
+          // https://github.com/rollup/rollup/issues/2322
           test: /export default \(function/g,
           replace: "export default (null, function"
         }
