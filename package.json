@@ -29,5 +29,7 @@
   },
   "scripts": {
     "build": "shx rm -rf dist && rollup -c"
-  }
+  },
+  "repository": "openstyles/stylus-lang-bundle",
+  "license": "MIT"
 }
