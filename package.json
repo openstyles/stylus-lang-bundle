@@ -12,5 +12,8 @@
     "jade",
     "language"
   ],
-  "main": "stylus.min.js"
+  "main": "stylus.min.js",
+  "dependencies": {
+    "stylus": "github:stylus/stylus#dev"
+  }
 }
