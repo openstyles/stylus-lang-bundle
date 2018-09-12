@@ -4,25 +4,34 @@ Because we needed to provide a tagged release source file for use in our [Stylus
 
 Eventually, it will be updated to bundle the [stylus language](https://github.com/stylus/stylus) code from the source. The original attempt is located here: https://github.com/eight04/stylus-lang-bundle; but due to some limitations, it is not currently working.
 
-## Install via [npm](https://npmjs.org/)
+## Live demo
+
+https://rawgit.com/openstyles/stylus-lang-bundle/master/demo/
+
+## Install
+
+Via [npm](https://npmjs.org/):
 
 ```bash
 $ npm install stylus-bundle
 ```
 
+Or via [unpkg CDN](https://unpkg.com/):
+
+```html
+<script src="https://unpkg.com/stylus-lang-bundle@latest"></script>
+```
+
 ## Usage
 
 ```js
-const stylus = require("stylus-bundle");
-
+// stylus-renderer.min.js exports a single class `StylusRenderer` to global
 function render(input) {
-  stylus(input).render(function(err, result) {
-    if (err) {
-      console.error(err);
-    } else {
-      return result;
-    }
-  });
+  try {
+    return new StylusRenderer(input).render();
+  } catch (err) {
+    console.error(err);
+  }
 }
 ```
 
