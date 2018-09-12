@@ -12,7 +12,7 @@
     "jade",
     "language"
   ],
-  "main": "stylus.min.js",
+  "unpkg": "dist/stylus-renderer.min.js",
   "dependencies": {
     "event-lite": "^0.1.1",
     "path-browserify": "^1.0.0",
