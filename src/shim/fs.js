@@ -11,7 +11,7 @@ module.exports = {
   },
   readFileSync: file => {
     if (file === "functions.styl") {
-      return $inline("../node_modules/stylus/lib/functions/index.styl|stringify");
+      return $inline("../../node_modules/stylus/lib/functions/index.styl|stringify");
     }
     return notImplemented();
   },

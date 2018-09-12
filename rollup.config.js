@@ -23,8 +23,8 @@ export default {
       path: require.resolve("path-browserify")
     }),
     shimEmpty([
-      "node_modules/stylus/lib/visitor/sourcemapper.js",
-      "node_modules/stylus/lib/functions/image-size.js",
+      "stylus/lib/visitor/sourcemapper.js",
+      "stylus/lib/functions/image-size.js",
     ]),
     inline(),
     resolve({
@@ -51,6 +51,11 @@ export default {
           match: /utils\.js$/,
           test: /this\.indent/g,
           replace: "this && this.indent"
+        },
+        {
+          match: /(utils|renderer)\.js$/,
+          test: /__dirname/,
+          replace: '"/"'
         }
       ]
     }),
@@ -75,7 +80,7 @@ export default {
 };
 
 function shimEmpty(files) {
-  files = files.map(f => path.resolve(f));
+  files = files.map(f => require.resolve(f));
   return {
     name: "rollup-plugin-shim-empty",
     transform(code, id) {
