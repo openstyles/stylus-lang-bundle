@@ -20,6 +20,7 @@
     "tiny-sha1": "^0.2.1"
   },
   "devDependencies": {
+    "mocha": "^5.2.0",
     "rollup": "^0.65.2",
     "rollup-plugin-alias": "^1.4.0",
     "rollup-plugin-cjs-es": "^0.6.0",
@@ -31,7 +32,7 @@
     "shx": "^0.3.2"
   },
   "scripts": {
-    "test": "node test.js",
+    "test": "mocha",
     "build": "shx rm -rf dist && rollup -c"
   },
   "repository": "openstyles/stylus-lang-bundle",
