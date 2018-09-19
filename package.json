@@ -21,14 +21,14 @@
   },
   "devDependencies": {
     "mocha": "^5.2.0",
-    "rollup": "^0.65.2",
+    "rollup": "^0.66.0",
     "rollup-plugin-alias": "^1.4.0",
-    "rollup-plugin-cjs-es": "^0.6.0",
+    "rollup-plugin-cjs-es": "^0.7.0",
     "rollup-plugin-external-globals": "^0.2.0",
     "rollup-plugin-inline-js": "^0.3.0",
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-re": "^1.0.7",
-    "rollup-plugin-terser": "^2.0.2",
+    "rollup-plugin-terser": "^3.0.0",
     "shx": "^0.3.2"
   },
   "scripts": {
