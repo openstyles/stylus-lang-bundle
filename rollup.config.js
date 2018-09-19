@@ -80,7 +80,10 @@ export default {
       util: "nodeUtil"
     }),
     terser({
-      keep_fnames: true
+      keep_fnames: true,
+      compress: {
+        passes: 3
+      }
     })
   ]
 };
