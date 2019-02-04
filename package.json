@@ -14,17 +14,17 @@
   ],
   "unpkg": "dist/stylus-renderer.min.js",
   "dependencies": {
-    "event-lite": "^0.1.1",
+    "event-lite": "^0.1.2",
     "path-browserify": "^1.0.0",
     "stylus": "github:openstyles/stylus-lang#stylus-extension",
     "tiny-sha1": "^0.2.1"
   },
   "devDependencies": {
     "mocha": "^5.2.0",
-    "rollup": "^0.66.0",
-    "rollup-plugin-alias": "^1.4.0",
+    "rollup": "^0.66.6",
+    "rollup-plugin-alias": "^1.5.1",
     "rollup-plugin-cjs-es": "^0.7.0",
-    "rollup-plugin-external-globals": "^0.2.0",
+    "rollup-plugin-external-globals": "^0.2.1",
     "rollup-plugin-inline-js": "^0.3.0",
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-re": "^1.0.7",
