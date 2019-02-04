@@ -1,0 +1,20 @@
+body {
+  margin: 0;
+  font-family: monospace;
+  height: 100vh;
+  display: flex;
+}
+textarea {
+  background: whitesmoke;
+  padding: 1em;
+  width: 50%;
+}
+output {
+  white-space: pre;
+  padding: 1em;
+  width: 50%;
+  overflow: auto;
+}
+output.error {
+  color: red;
+}
