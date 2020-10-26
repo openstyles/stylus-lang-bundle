@@ -2,7 +2,7 @@ const assert = require("assert");
 const fs = require("fs");
 const path = require("path");
 
-const CASES_ROOT = `${__dirname}/../node_modules/stylus/test/cases`;
+const CASES_ROOT = `${__dirname}/cases`;
 
 eval(fs.readFileSync(`${__dirname}/../dist/stylus-renderer.min.js`, "utf8"));
 

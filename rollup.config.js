@@ -1,9 +1,9 @@
-import alias from "rollup-plugin-alias";
+import alias from "@rollup/plugin-alias";
 import cjs from "rollup-plugin-cjs-es";
 import externalGlobals from "rollup-plugin-external-globals";
 import inline from "rollup-plugin-inline-js";
 import re from "rollup-plugin-re";
-import resolve from "rollup-plugin-node-resolve";
+import resolve from "@rollup/plugin-node-resolve";
 import {terser} from "rollup-plugin-terser";
 
 export default {
@@ -15,12 +15,14 @@ export default {
   },
   plugins: [
     alias({
-      events: require.resolve("./src/shim/events"),
-      url: require.resolve("./src/shim/url"),
-      crypto: require.resolve("./src/shim/crypto"),
-      glob: require.resolve("./src/shim/glob"),
-      fs: require.resolve("./src/shim/fs"),
-      path: require.resolve("path-browserify")
+      entries: {
+        events: require.resolve("./src/shim/events"),
+        url: require.resolve("./src/shim/url"),
+        crypto: require.resolve("./src/shim/crypto"),
+        glob: require.resolve("./src/shim/glob"),
+        fs: require.resolve("./src/shim/fs"),
+        path: require.resolve("path-browserify")
+      }
     }),
     shimEmpty([
       "stylus/lib/visitor/sourcemapper.js",
