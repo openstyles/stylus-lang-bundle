@@ -4,13 +4,13 @@ function notImplemented() {
 
 module.exports = {
   statSync: file => {
-    if (file === "functions.styl") {
+    if (file === "functions/index.styl") {
       return {mtime: 0};
     }
     return notImplemented();
   },
   readFileSync: file => {
-    if (file === "functions.styl") {
+    if (file === "functions/index.styl") {
       return $inline("../../node_modules/stylus/lib/functions/index.styl|crlf|stringify");
     }
     return notImplemented();

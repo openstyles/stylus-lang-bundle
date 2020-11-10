@@ -1,12 +1,12 @@
 # Stylus Language Bundle
 
-Because we needed to provide a tagged release source file for use in our [Stylus](https://github.com/openstyles/stylus) WebExtension, this repository *currently* copies the minified bundled version of the Stylus Language code from http://stylus-lang.com/try/stylus.min.js.
+This repository bundles [Stylus language compiler](https://github.com/stylus/stylus) into a single file that can be used in the browser.
 
-Eventually, it will be updated to bundle the [stylus language](https://github.com/stylus/stylus) code from the source. The original attempt is located here: https://github.com/eight04/stylus-lang-bundle; but due to some limitations, it is not currently working.
+The source comes from stylus/stylus#dev which means it may include some beta features or bugs. See `package-lock.json` for the actual version number.
 
 ## Live demo
 
-https://rawgit.com/openstyles/stylus-lang-bundle/master/demo/
+https://raw.githack.com/openstyles/stylus-lang-bundle/master/demo/
 
 ## Install
 
