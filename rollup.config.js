@@ -1,5 +1,6 @@
 import alias from "@rollup/plugin-alias";
 import cjs from "rollup-plugin-cjs-es";
+import glob from "glob";
 import externalGlobals from "rollup-plugin-external-globals";
 import inline from "rollup-plugin-inline-js";
 import re from "rollup-plugin-re";
@@ -27,6 +28,7 @@ export default {
     shimEmpty([
       "stylus/lib/visitor/sourcemapper.js",
       "stylus/lib/functions/image-size.js",
+      ...glob.sync("node_modules/debug/src/**.js").map(f => f.slice("node_modules/".length)),
     ]),
     inline(),
     resolve({

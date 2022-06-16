@@ -1,7 +1,7 @@
 {
   "name": "stylus-lang-bundle",
   "description": "Browser friendly version of Stylus Language",
-  "version": "0.54.7",
+  "version": "0.58.1",
   "author": "TJ Holowaychuk <tj@vision-media.ca>",
   "homepage": "http://stylus-lang.com/",
   "keywords": [
@@ -16,13 +16,14 @@
   "dependencies": {
     "event-lite": "^0.1.2",
     "path-browserify": "^1.0.1",
-    "stylus": "github:stylus/stylus#dev",
+    "stylus": "0.58.1",
     "tiny-sha1": "^0.2.1"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^3.1.1",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "decompress": "^4.2.1",
+    "glob": "^7.1.6",
     "make-fetch-happen": "^8.0.10",
     "mocha": "^8.2.0",
     "rollup": "^2.32.1",
