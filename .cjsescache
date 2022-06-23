@@ -1,8 +1,6 @@
 [
   "node_modules/debug/src/browser.js",
-  "node_modules/debug/src/debug.js",
   "node_modules/event-lite/event-lite.js",
-  "node_modules/ms/index.js",
   "node_modules/path-browserify/index.js",
   "node_modules/stylus/lib/cache/index.js",
   "node_modules/stylus/lib/cache/memory.js",
