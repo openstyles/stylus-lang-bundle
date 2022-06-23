@@ -37,7 +37,10 @@
   "scripts": {
     "test": "npm run build && mocha",
     "build": "shx rm -rf dist && rollup -c",
-    "build-test": "shx rm -rf test/cases && node build-test-cases.mjs"
+    "build-test": "shx rm -rf test/cases && node build-test-cases.mjs",
+    "preversion": "npm test",
+    "version": "npm run build && git add .",
+    "postversion": "git push --follow-tags && npm publish"
   },
   "repository": "openstyles/stylus-lang-bundle",
   "license": "MIT",
