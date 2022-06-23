@@ -2,7 +2,7 @@
 
 This repository bundles [Stylus language compiler](https://github.com/stylus/stylus) into a single file that can be used in the browser.
 
-The source comes from stylus/stylus#dev which means it may include some beta features or bugs. See `package-lock.json` for the actual version number.
+The current version of the compiler is 0.58.1.
 
 ## Live demo
 
@@ -19,7 +19,7 @@ $ npm install stylus-bundle
 Or via [unpkg CDN](https://unpkg.com/):
 
 ```html
-<script src="https://unpkg.com/stylus-lang-bundle@latest"></script>
+<script src="https://unpkg.com/stylus-lang-bundle@0.58.1/dist/stylus-renderer.min.js"></script>
 ```
 
 ## Usage
