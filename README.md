@@ -38,3 +38,9 @@ function render(input) {
 ## Home page
 
 Home page for this program with examples, documentation and a live demo: http://stylus-lang.com/
+
+## Changelog
+
+* 0.58.1 (Jun 23, 2022)
+
+  - Bump stylus-lang to 0.58.1
