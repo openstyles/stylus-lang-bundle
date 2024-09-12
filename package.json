@@ -16,7 +16,7 @@
   "dependencies": {
     "event-lite": "^0.1.2",
     "path-browserify": "^1.0.1",
-    "stylus": "0.58.1",
+    "stylus": "0.63.0",
     "tiny-sha1": "^0.2.1"
   },
   "devDependencies": {
