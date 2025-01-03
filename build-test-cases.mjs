@@ -1,8 +1,13 @@
-import fetch from "make-fetch-happen";
-import decompress from "decompress";
+import fs from 'fs';
+import decompress from 'decompress';
 
-const r = await fetch("https://github.com/stylus/stylus/archive/dev.zip");
-const b = await r.buffer();
+const DIR = "test/cases";
+const URL = "https://github.com/stylus/stylus/archive/dev.zip";
+
+fs.rmSync(DIR, {recursive: true, force: true});
+console.log(`Fetching tests from ${URL}...`);
+
+const b = Buffer.from(await (await fetch(URL)).arrayBuffer());
 const files = await decompress(b, "test/cases", {
   filter: file => /test[\\/]cases[\\/][^\\/]+$/.test(file.path),
   map: file => {
@@ -10,3 +15,4 @@ const files = await decompress(b, "test/cases", {
     return file;
   }
 });
+console.log("Tests created.");

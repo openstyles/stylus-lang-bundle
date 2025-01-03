@@ -1,3 +1,4 @@
+import fs from "fs";
 import alias from "@rollup/plugin-alias";
 import cjs from "rollup-plugin-cjs-es";
 import glob from "glob";
@@ -7,11 +8,14 @@ import re from "rollup-plugin-re";
 import resolve from "@rollup/plugin-node-resolve";
 import {terser} from "rollup-plugin-terser";
 
+const DST_FILE = JSON.parse(fs.readFileSync('package.json', 'utf8')).unpkg;
+
 export default {
 	input: "src/index.js",
   output: {
-    file: "dist/stylus-renderer.min.js",
+    file: DST_FILE,
     format: "iife",
+    sourcemap: true,
     name: "StylusRenderer"
   },
   plugins: [
@@ -57,7 +61,22 @@ export default {
           replace: "this && this.indent"
         },
         {
-          match: /(utils|renderer)\.js$/,
+          match: /utils\.js$/,
+          test: /if \(!found && .+?node_modules[\s\S]+?(?=[\r\n]};)/,
+          replace: "return found;"
+        },
+        {
+          match: /utils\.js$/,
+          test: /[\r\n]\s*\/\/ Absolute[\r\n].+?[\r\n](?=\s*\/\/ Relative[\r\n])|,\s*{windowsPathsNoEscape[^}]+}/gs,
+          replace: ""
+        },
+        {
+          match: /[/\\]use\.js$/,
+          test: /([\r\n]function use)\(plugin.+?[\r\n]}(?=[\r\n])/s,
+          replace: "$1(){}"
+        },
+        {
+          match: /renderer\.js$/,
           test: /__dirname/,
           replace: '"/"'
         },
@@ -86,7 +105,7 @@ export default {
     terser({
       keep_fnames: true,
       compress: {
-        passes: 3
+        reduce_funcs: false,
       }
     })
   ]

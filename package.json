@@ -1,7 +1,7 @@
 {
   "name": "stylus-lang-bundle",
   "description": "Browser friendly version of Stylus Language",
-  "version": "0.63.1",
+  "version": "0.64.0",
   "author": "TJ Holowaychuk <tj@vision-media.ca>",
   "homepage": "http://stylus-lang.com/",
   "keywords": [
@@ -16,28 +16,28 @@
   "dependencies": {
     "event-lite": "^0.1.2",
     "path-browserify": "^1.0.1",
-    "stylus": "0.63.0",
+    "stylus": "0.64.0",
     "tiny-sha1": "^0.2.1"
   },
   "devDependencies": {
-    "@rollup/plugin-alias": "^3.1.1",
-    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@rollup/plugin-alias": "^5.1.1",
+    "@rollup/plugin-node-resolve": "^16.0.0",
     "decompress": "^4.2.1",
-    "glob": "^7.1.6",
-    "make-fetch-happen": "^8.0.10",
+    "glob": "^10.4.5",
     "mocha": "^10.2.0",
-    "rollup": "^2.75.7",
-    "rollup-plugin-cjs-es": "^1.0.1",
-    "rollup-plugin-external-globals": "^0.6.1",
-    "rollup-plugin-inline-js": "^0.4.0",
+    "npm-run-all": "^4.1.5",
+    "rollup": "^2.79.2",
+    "rollup-plugin-cjs-es": "^1.1.0",
+    "rollup-plugin-external-globals": "^0.13.0",
+    "rollup-plugin-inline-js": "^0.5.0",
     "rollup-plugin-re": "^1.0.7",
-    "rollup-plugin-terser": "^7.0.2",
-    "shx": "^0.3.3"
+    "rollup-plugin-terser": "^7.0.2"
   },
   "scripts": {
-    "test": "npm run build && mocha",
-    "build": "shx rm -rf dist && rollup -c",
-    "build-test": "shx rm -rf test/cases && node build-test-cases.mjs",
+    "ci": "run-p build build:tests && npm test",
+    "test": "mocha",
+    "build": "rollup -c",
+    "build:tests": "node build-test-cases.mjs",
     "preversion": "npm test",
     "version": "npm run build && git add .",
     "postversion": "git push --follow-tags && npm publish"
@@ -46,5 +46,8 @@
   "license": "MIT",
   "files": [
     "dist"
-  ]
+  ],
+  "engines": {
+    "node": ">=18"
+  }
 }

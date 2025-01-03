@@ -4,7 +4,7 @@ const path = require("path");
 
 const CASES_ROOT = `${__dirname}/cases`;
 
-eval(fs.readFileSync(`${__dirname}/../dist/stylus-renderer.min.js`, "utf8"));
+eval(fs.readFileSync(require('../package.json').unpkg, "utf8"));
 
 describe("stylus renderer", () => {
   before(() => {
