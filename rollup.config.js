@@ -6,7 +6,7 @@ import externalGlobals from "rollup-plugin-external-globals";
 import inline from "rollup-plugin-inline-js";
 import re from "rollup-plugin-re";
 import resolve from "@rollup/plugin-node-resolve";
-import {terser} from "rollup-plugin-terser";
+import terser from "@rollup/plugin-terser";
 
 const DST_FILE = JSON.parse(fs.readFileSync('package.json', 'utf8')).unpkg;
 
