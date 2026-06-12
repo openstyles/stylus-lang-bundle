@@ -130,5 +130,6 @@
   "node_modules/stylus/lib/visitor/normalizer.js",
   "node_modules/stylus/lib/visitor/sourcemapper.js",
   "node_modules/tiny-sha1/dist/tiny-sha1.mjs",
-  "src/index.js"
+  "src/index.js",
+  "src/shim/crypto.js"
 ]

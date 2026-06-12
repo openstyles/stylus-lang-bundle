@@ -1,10 +1,10 @@
 const assert = require("assert");
 const fs = require("fs");
 const path = require("path");
+const stylus = require("../" + require('../package.json').unpkg);
 
 const CASES_ROOT = `${__dirname}/cases`;
 
-eval(fs.readFileSync(require('../package.json').unpkg, "utf8"));
 
 describe("stylus renderer", () => {
   before(() => {
@@ -26,7 +26,7 @@ describe("stylus renderer", () => {
         this.skip("file related");
         return;
       }
-      assert.equal(new StylusRenderer(source).render().trim(), expect.trim());
+      assert.equal(stylus(source).render().trim(), expect.trim());
     });
   }
   after(() => {

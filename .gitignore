@@ -21,3 +21,5 @@ Desktop.ini
 .DS_Store
 
 test/cases/
+/stats.html
+/stats.json

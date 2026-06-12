@@ -1,32 +1,39 @@
-import fs from "fs";
+import {fileURLToPath} from "node:url";
 import alias from "@rollup/plugin-alias";
 import cjs from "rollup-plugin-cjs-es";
-import glob from "glob";
-import externalGlobals from "rollup-plugin-external-globals";
+import {glob} from "glob";
 import inline from "rollup-plugin-inline-js";
 import re from "rollup-plugin-re";
 import resolve from "@rollup/plugin-node-resolve";
 import terser from "@rollup/plugin-terser";
+import analyzer from "rollup-plugin-analyzer";
+import esInfo from "rollup-plugin-es-info";
+import {visualizer} from "rollup-plugin-visualizer";
+import ownPkg from "./package.json" with { type: 'json' };
 
-const DST_FILE = JSON.parse(fs.readFileSync('package.json', 'utf8')).unpkg;
+const DST_FILE = ownPkg.unpkg;
+const DEBUG = process.env.DEBUG === "1";
+const NO_TERSER = DEBUG || process.env.NO_TERSER === "1";
+const resolvePkg = id => fileURLToPath(import.meta.resolve(id.replaceAll('\\', '/')));
 
 export default {
-	input: "src/index.js",
+  input: "src/index.js",
   output: {
     file: DST_FILE,
-    format: "iife",
+    format: "umd",
     sourcemap: true,
-    name: "StylusRenderer"
+    name: "stylus"
   },
   plugins: [
     alias({
       entries: {
-        events: require.resolve("./src/shim/events"),
-        url: require.resolve("./src/shim/url"),
-        crypto: require.resolve("./src/shim/crypto"),
-        glob: require.resolve("./src/shim/glob"),
-        fs: require.resolve("./src/shim/fs"),
-        path: require.resolve("path-browserify")
+        events: resolvePkg("./src/shim/events"),
+        url: resolvePkg("./src/shim/url"),
+        crypto: resolvePkg("./src/shim/crypto"),
+        glob: resolvePkg("./src/shim/glob"),
+        fs: resolvePkg("./src/shim/fs"),
+        util: resolvePkg("./src/shim/util"),
+        path: resolvePkg("path-browserify")
       }
     }),
     shimEmpty([
@@ -40,6 +47,11 @@ export default {
     }),
     re({
       patterns: [
+        {
+          match: /[/\\]cache[/\\](fs|memory)\.js$/,
+          test: "crypto.createHash",
+          replace: "crypto"
+        },
         {
           match: /selector.js$/,
           test: /\bnew require\b/g,
@@ -99,20 +111,24 @@ export default {
         }
       ]
     }),
-    externalGlobals({
-      util: "nodeUtil"
-    }),
-    terser({
+    !NO_TERSER && terser({
       keep_fnames: true,
       compress: {
         reduce_funcs: false,
       }
-    })
+    }),
+    DEBUG && esInfo({
+      file: "stats.json"
+    }),
+    DEBUG && analyzer(),
+    DEBUG && visualizer({
+      open: true
+    }),
   ]
 };
 
 function shimEmpty(files) {
-  files = files.map(f => require.resolve(f));
+  files = files.map(f => resolvePkg(f));
   return {
     name: "rollup-plugin-shim-empty",
     transform(code, id) {
