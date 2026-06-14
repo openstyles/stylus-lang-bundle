@@ -15,6 +15,7 @@ const DST_FILE = ownPkg.unpkg;
 const DEBUG = process.env.DEBUG === "1";
 const NO_TERSER = DEBUG || process.env.NO_TERSER === "1";
 const resolvePkg = id => fileURLToPath(import.meta.resolve(id.replaceAll('\\', '/')));
+const toMatch = new Set();
 
 export default {
   input: "src/index.js",
@@ -47,57 +48,47 @@ export default {
     }),
     re({
       patterns: [
-        {
-          match: /[/\\]cache[/\\](fs|memory)\.js$/,
-          test: "crypto.createHash",
-          replace: "crypto"
-        },
-        {
-          match: /selector.js$/,
-          test: /\bnew require\b/g,
-          replace: "require"
-        },
-        {
-          match: /renderer.js$/,
-          test: /module\.exports = /g,
-          replace: "module.exports.Renderer = "
-        },
-        {
-          match: /arguments\.js$/,
-          test: /require\('\.\.\/nodes'\)/g,
-          replace: "{Expression: require('./expression')}"
-        },
-        {
-          match: /utils\.js$/,
-          test: /this\.indent/g,
-          replace: "this && this.indent"
-        },
-        {
-          match: /utils\.js$/,
-          test: /if \(!found && .+?node_modules[\s\S]+?(?=[\r\n]};)/,
-          replace: "return found;"
-        },
-        {
-          match: /utils\.js$/,
-          test: /[\r\n]\s*\/\/ Absolute[\r\n].+?[\r\n](?=\s*\/\/ Relative[\r\n])|,\s*{windowsPathsNoEscape[^}]+}/gs,
-          replace: ""
-        },
-        {
-          match: /[/\\]use\.js$/,
-          test: /([\r\n]function use)\(plugin.+?[\r\n]}(?=[\r\n])/s,
-          replace: "$1(){}"
-        },
-        {
-          match: /renderer\.js$/,
-          test: /__dirname/,
-          replace: '"/"'
-        },
-        {
-          match: /\bs\.js$/,
-          test: /self\.options/g,
-          replace: "self && self.options"
-        }
-      ]
+        ["**/cache/{fs|memory}.js",
+          "crypto.createHash",
+          "crypto",
+        ],
+        ["**/functions/selector.js",
+          /\bnew require\b/g,
+          "require",
+        ],
+        ["**/renderer.js",
+          /module\.exports = /g,
+          "module.exports.Renderer = ",
+        ],
+        ["**/arguments.js",
+          /require\('\.\.\/nodes'\)/g,
+          "{Expression: require('./expression')}",
+        ],
+        ["**/utils.js",
+          /this\.indent/g,
+          "this && this.indent",
+        ],
+        ["**/utils.js",
+          /if \(!found && .+?node_modules[\s\S]+?(?=[\r\n]};)/,
+          "return found;",
+        ],
+        ["**/utils.js",
+          /[\r\n]\s*\/\/ Absolute[\r\n].+?[\r\n](?=\s*\/\/ Relative[\r\n])|,\s*{windowsPathsNoEscape[^}]+}/gs,
+          "",
+        ],
+        ["**/use.js",
+          /([\r\n]function use)\(plugin.+?[\r\n]}(?=[\r\n])/s,
+          "$1(){}",
+        ],
+        ["**/renderer.js",
+          /__dirname/,
+          '"/"',
+        ],
+        ["**/functions/s.js",
+          "self.options",
+          "self && self.options",
+        ],
+      ].map(mustMatch),
     }),
     cjs({
       nested: true
@@ -111,6 +102,14 @@ export default {
         }
       ]
     }),
+    {
+      name: "<re> did not match some files",
+      buildEnd(error) {
+        if (toMatch.size) {
+          throw new Error('\n' + [...toMatch].join(',\n'));
+        }
+      }
+    },
     !NO_TERSER && terser({
       keep_fnames: true,
       compress: {
@@ -126,6 +125,19 @@ export default {
     }),
   ]
 };
+
+function mustMatch([match, test, replace]) {
+  toMatch.add(match);
+  return {
+    match,
+    transform(code, id) {
+      const code2 = code.replace(test, replace);
+      if (code2 === code) throw new Error(`${id}: could not find ${test}`);
+      toMatch.delete(match);
+      return code2;
+    }
+  };
+}
 
 function shimEmpty(files) {
   files = files.map(f => resolvePkg(f));
