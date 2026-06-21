@@ -33,9 +33,6 @@
     "stylus": "0.64.0",
     "tiny-sha1": "^0.2.1"
   },
-  "overrides": {
-    "rollup": "^4.61.1"
-  },
   "scripts": {
     "ci": "run-p build build:tests && npm test",
     "test": "mocha",

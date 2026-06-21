@@ -1,0 +1,4 @@
+node-linker: hoisted
+overrides:
+  "stylus>glob": ">=12"
+  "rollup": "^4.61.1"
